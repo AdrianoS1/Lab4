@@ -180,7 +180,11 @@ def menu(exits):
     # Repeat until the player enter a valid choice
     while True:
         print_menu(exits)
-        input()
+        user_input = normalise_input(input())
+        if is_valid_exit(exits, user_input) == True:
+            return user_input
+        else:
+            menu(exits)
 
         # COMPLETE THIS PART:
         
@@ -208,8 +212,8 @@ def move(exits, direction):
     >>> move(rooms["Reception"]["exits"], "west") == rooms["Office"]
     False
     """
-    room = rooms[exits[direction]]
-    return room
+    current_room = rooms[exits[direction]]
+    return current_room
 
 
 # This is the entry point of our program
